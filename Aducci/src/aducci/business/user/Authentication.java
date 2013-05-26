@@ -1,26 +1,23 @@
-package aducci.user;
+package aducci.business.user;
 
-
-import aducci.core.UserCore;
+import aducci.core.AuthorizedEmailCore;
 
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
-
 public class Authentication {
 
-	public static LoginState IsAuthorizedUser()
-	{
+	public static LoginState GetLoginState() {
 		UserService userService = UserServiceFactory.getUserService();
 		User user = userService.getCurrentUser();
-		
-		if(!userService.isUserLoggedIn())
-		{
+
+		if (!userService.isUserLoggedIn()) {
 			return LoginState.notLoggedIn;
 		}
-		
-		return UserCore.IsAuthorizedUser(user) ? LoginState.validEmail : LoginState.invalidEmail;		
-		
-	}	
+
+		return AuthorizedEmailCore.IsAuthorizedEmail(user.getEmail()) ? LoginState.validEmail : LoginState.invalidEmail;
+	}
+	
+	
 }
