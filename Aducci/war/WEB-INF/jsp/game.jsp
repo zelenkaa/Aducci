@@ -1,5 +1,5 @@
 <html>
 	<body>
-		Game id: <%= request.getParameter("gameid") %>		
+		Test Game id: <%= request.getParameter("gameid") %>		
 	</body>
 </html>
